@@ -68,8 +68,41 @@ def change_board(board: dict, player_1: str, player_with_input: str, user_input:
 
 
 def check_winner(board: dict) -> bool:
-    # match board:
-    #     case (0,_):
+    board_list = board.items()
+    if column_check(board_list):
+        return True
+    elif row_check(board_list):
+        return True
+    elif cross_check(board_list):
+        return True
+    else:
+        return False
+
+
+def column_check(items) -> bool:
+    current = 0
+    while current <= 2:
+        current_items = filter(lambda a: a[0][0] == current, items)
+        true_count = 0
+        false_count = 0
+        for item in current_items:
+            if item[1] is None:
+                continue
+            elif item[1]:
+                true_count += 1
+            else:
+                false_count += 1
+        if true_count == 3 or false_count == 3:
+            return True
+        current += 1
+    return False
+
+
+def row_check(items) -> bool:
+    pass
+
+
+def cross_check(items) -> bool:
     pass
 
 
