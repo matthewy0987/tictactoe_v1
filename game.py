@@ -73,7 +73,9 @@ def check_winner(board: dict) -> bool:
         return True
     elif row_check(board_list):
         return True
-    elif cross_check(board_list):
+    elif cross_check_l_r(board_list):
+        return True
+    elif cross_check_r_l(board_list):
         return True
     else:
         return False
@@ -99,11 +101,61 @@ def column_check(items) -> bool:
 
 
 def row_check(items) -> bool:
-    pass
+    current = 0
+    while current <= 2:
+        current_items = filter(lambda a: a[0][1] == current, items)
+        true_count = 0
+        false_count = 0
+        for item in current_items:
+            if item[1] is None:
+                continue
+            elif item[1]:
+                true_count += 1
+            else:
+                false_count += 1
+        if true_count == 3 or false_count == 3:
+            return True
+        current += 1
+    return False
 
 
-def cross_check(items) -> bool:
-    pass
+def cross_check_l_r(items) -> bool:
+    cross_left_right = {(0, 0), (1, 1), (2, 2)}
+    filtered_l_r = filter(lambda a: a[0] in cross_left_right, items)
+    for item in filtered_l_r:
+        true_count = 0
+        false_count = 0
+        if item[1] is None:
+            continue
+        elif item[1]:
+            true_count += 1
+        else:
+            false_count += 1
+    if true_count == 3 or false_count == 3:
+        return True
+    return False
+
+
+def cross_check_r_l(items) -> bool:
+    cross_right_left = {(0, 2), (1, 1), (2, 0)}
+    filtered_r_l = filter(lambda a: a[0] in cross_right_left, items)
+    for item in filtered_r_l:
+        true_count = 0
+        false_count = 0
+        if item[1] is None:
+            continue
+        elif item[1]:
+            true_count += 1
+        else:
+            false_count += 1
+    if true_count == 3 or false_count == 3:
+        return True
+    return False
+
+
+def check_rain(board, user_input):
+    32
+
 
 
 def print_board(board: dict):
