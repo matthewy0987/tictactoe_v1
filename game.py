@@ -61,6 +61,7 @@ def get_player_xy() -> int:
         else:
             if user_input in accepted_input:
                 return user_input
+        print("ERROR: enter an acceptable integer (0-2)")
 
 
 def change_board(board: dict, player_1: str, player_with_input: str, user_input: tuple):
@@ -120,11 +121,11 @@ def row_check(items) -> bool:
 
 
 def cross_check_l_r(items) -> bool:
-    cross_left_right = {(0, 0), (1, 1), (2, 2)}
+    cross_left_right = set([(0, 0), (1, 1), (2, 2)])
     filtered_l_r = filter(lambda a: a[0] in cross_left_right, items)
+    true_count = 0
+    false_count = 0
     for item in filtered_l_r:
-        true_count = 0
-        false_count = 0
         if item[1] is None:
             continue
         elif item[1]:
@@ -139,9 +140,9 @@ def cross_check_l_r(items) -> bool:
 def cross_check_r_l(items) -> bool:
     cross_right_left = {(0, 2), (1, 1), (2, 0)}
     filtered_r_l = filter(lambda a: a[0] in cross_right_left, items)
+    true_count = 0
+    false_count = 0
     for item in filtered_r_l:
-        true_count = 0
-        false_count = 0
         if item[1] is None:
             continue
         elif item[1]:
