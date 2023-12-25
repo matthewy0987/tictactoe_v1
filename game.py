@@ -154,6 +154,11 @@ def cross_check_r_l(items) -> bool:
     return False
 
 
+def check_draw(board: dict) -> bool:
+    filtered = [value for value in board.values() if value is None]
+    return len(filtered) == 0
+
+
 def check_rain(board, user_input):
     32
 
@@ -173,26 +178,60 @@ def print_board(board: dict):
     return
 
 
+def quit_input() -> bool:
+    user_input = input("continue? (Y/N)\n")
+    user_input = user_input.strip()
+    return user_input.upper() == "N"
+
+
+def populate_win_count(count: dict, name_one: str, name_two: str):
+    count[name_one] = 0
+    count[name_two] = 0
+    return count
+
+
+def handle_ending(winner: str, count: dict):
+    if winner == "draws":
+        print("result is a draw")
+    else:
+        print(f"the winner is {winner}")
+    count[winner] += 1
+    for key in count.keys():
+        if key == "draws":
+            print(f"{key}: {count[key]}")
+        else:
+            print(f"{key}: {count[key]} wins")
+    # return count
+
+
 def run_ttt():
+    want_to_continue = True
+    win_count = {"draws": 0}
     player_1 = get_user_name()
     player_2 = get_user_name()
-    board = make_board()
-    winner = None
-    while winner is None:
-        print_board(board)
-        print(f"{player_1}'s turn")
-        player_1_input = player_choice(board)
-        change_board(board, player_1, player_1, player_1_input)
-        print_board(board)
-        if check_winner(board):
-            winner = player_1
-        else:
-            print(f"{player_2}'s turn")
-            player_2_input = player_choice(board)
-            change_board(board, player_1, player_2, player_2_input)
+    populate_win_count(win_count, player_1, player_2)
+    while want_to_continue:
+        board = make_board()
+        winner = None
+        while winner is None:
+            print_board(board)
+            print(f"{player_1}'s turn")
+            player_1_input = player_choice(board)
+            change_board(board, player_1, player_1, player_1_input)
+            print_board(board)
             if check_winner(board):
-                winner = player_2
-    print(f"the winner is {winner}")
+                winner = player_1
+            elif check_draw(board):
+                winner = "draws"
+            else:
+                print(f"{player_2}'s turn")
+                player_2_input = player_choice(board)
+                change_board(board, player_1, player_2, player_2_input)
+                if check_winner(board):
+                    winner = player_2
+        handle_ending(winner, win_count)
+        if quit_input():
+            want_to_continue = False
 
 
 def main():
