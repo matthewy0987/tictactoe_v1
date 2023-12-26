@@ -179,9 +179,23 @@ def print_board(board: dict):
 
 
 def quit_input() -> bool:
-    user_input = input("continue? (Y/N)\n")
-    user_input = user_input.strip()
-    return user_input.upper() == "N"
+    """
+    determine if players want to continue playing
+
+    :precondition: game has completed
+    :postcondition: correctly determine if player would like to continue
+                    if (N)o than True, player does not want to continue
+                    if (Y)es then False, player wants to keep playing
+    :return: boolean value representing if player want to continue
+    """
+    accepted_input = ["y", "n", "Y", "N"]
+    while True:
+        user_input = input("continue? (Y/N)\n")
+        if user_input in accepted_input:
+            user_input = user_input.strip()
+            return user_input.upper() == "N"
+        else:
+            print("please enter 'y' or 'n'")
 
 
 def populate_win_count(count: dict, name_one: str, name_two: str):
@@ -201,7 +215,6 @@ def handle_ending(winner: str, count: dict):
             print(f"{key}: {count[key]}")
         else:
             print(f"{key}: {count[key]} wins")
-    # return count
 
 
 def run_ttt():
