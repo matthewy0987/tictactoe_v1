@@ -163,7 +163,6 @@ def check_rain(board, user_input):
     32
 
 
-
 def print_board(board: dict):
     for row in range(3):
         row_to_print = ""
@@ -217,6 +216,17 @@ def handle_ending(winner: str, count: dict):
             print(f"{key}: {count[key]} wins")
 
 
+def wants_to_swap() -> bool:
+    accepted_input = ["y", "n", "Y", "N"]
+    while True:
+        user_input = input("want to swap who goes first?(Y/N)\n")
+        if user_input in accepted_input:
+            user_input = user_input.strip()
+            return user_input.upper() == "Y"
+        else:
+            print("please enter 'y' or 'n'")
+
+
 def run_ttt():
     want_to_continue = True
     win_count = {"draws": 0}
@@ -245,6 +255,11 @@ def run_ttt():
         handle_ending(winner, win_count)
         if quit_input():
             want_to_continue = False
+            print("Thanks for Playing")
+        elif wants_to_swap():
+            placeholder = player_1
+            player_1 = player_2
+            player_2 = placeholder
 
 
 def main():
