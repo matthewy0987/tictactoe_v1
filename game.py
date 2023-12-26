@@ -69,6 +69,16 @@ def change_board(board: dict, player_1: str, player_with_input: str, user_input:
 
 
 def check_winner(board: dict) -> bool:
+    """
+    Determine if there is a winner
+
+    :param board: dictionary representing the board state
+    :precondition: change has been made to board recently
+                   board must be a dictionary representing the game board
+    :postcondition: correctly determines if there is a winner
+                    if there eis a winner returns True otherwise False
+    :return: Boolean value representing if there is a winner
+    """
     board_list = board.items()
     if column_check(board_list):
         return True
