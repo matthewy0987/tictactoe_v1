@@ -204,6 +204,18 @@ def populate_win_count(count: dict, name_one: str, name_two: str):
 
 
 def handle_ending(winner: str, count: dict):
+    """
+    Perform actions for ending sequence
+
+    ending sequence includes printing messages and changing winner count dictionary
+
+    :param winner: string representing winning player
+    :param count: dictionary holding the amount of times a player has won or draw has occurred
+    :precondition: game has just been completed
+                   winner must be a string representing the winning player
+                   count must be a dictionary that has the winner string as a key
+    :postcondition: count dictionary values is correctly changed based on outcome of game
+    """
     if winner == "draws":
         print("result is a draw")
     else:
@@ -217,6 +229,15 @@ def handle_ending(winner: str, count: dict):
 
 
 def wants_to_swap() -> bool:
+    """
+    determine if players want to swap who goes first
+
+    :precondition: game has completed
+    :postcondition: correctly determine if player would like to swap turns
+                    if (N)o than False, player does not want to swap
+                    if (Y)es then True, player wants to swap
+    :return: boolean value representing if player want to swap
+    """
     accepted_input = ["y", "n", "Y", "N"]
     while True:
         user_input = input("want to swap who goes first?(Y/N)\n")
@@ -228,6 +249,9 @@ def wants_to_swap() -> bool:
 
 
 def run_ttt():
+    """
+    drive the game
+    """
     want_to_continue = True
     win_count = {"draws": 0}
     player_1 = get_user_name()
