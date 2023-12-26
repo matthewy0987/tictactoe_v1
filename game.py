@@ -164,6 +164,15 @@ def check_rain(board, user_input):
 
 
 def print_board(board: dict):
+    """
+    print message displaying game board
+
+    player one is represented using 'X' and player two is represented using 'O' blank paces with '_'
+
+    :param board: dictionary representing current state of board
+    :precondition: current board state has not been displayed yet
+    :postcondition: message is displayed that correctly displays the board
+    """
     for row in range(3):
         row_to_print = ""
         for column in range(3):
@@ -204,8 +213,8 @@ def populate_win_count(count: dict, name_one: str, name_two: str) -> dict:
     :param count: dictionary holding the number of an outcome
     :param name_one: string representing plyer one
     :param name_two: string representing player two
-    :precondition: dictionary keeoing track of wins has not been populated yet
-                   count must be a dictioary with key 'draws' already in it
+    :precondition: dictionary keeping track of wins has not been populated yet
+                   count must be a dictionary with key 'draws' already in it
                    name_one must be a string not yet in count
                    name_two must be a string not yet in count
     :postcondition: count dictionary has keys name_one and name_two added with values being integer 0
