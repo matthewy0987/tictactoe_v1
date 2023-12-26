@@ -197,7 +197,20 @@ def quit_input() -> bool:
             print("please enter 'y' or 'n'")
 
 
-def populate_win_count(count: dict, name_one: str, name_two: str):
+def populate_win_count(count: dict, name_one: str, name_two: str) -> dict:
+    """
+    add player keys to dictionary
+
+    :param count: dictionary holding the number of an outcome
+    :param name_one: string representing plyer one
+    :param name_two: string representing player two
+    :precondition: dictionary keeoing track of wins has not been populated yet
+                   count must be a dictioary with key 'draws' already in it
+                   name_one must be a string not yet in count
+                   name_two must be a string not yet in count
+    :postcondition: count dictionary has keys name_one and name_two added with values being integer 0
+    :return: dictionary that has had keys added
+    """
     count[name_one] = 0
     count[name_two] = 0
     return count
